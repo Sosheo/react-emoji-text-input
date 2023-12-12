@@ -1,5 +1,5 @@
 import './App.css';
-import { EmojiInput } from "./components/TextInput" //EmojiTextarea
+import { EmojiInput } from "./components" //EmojiTextarea
 
 function App() {
   return (
