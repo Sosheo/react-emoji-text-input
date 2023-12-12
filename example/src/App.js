@@ -1,22 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import { EmojiInput } from "./components/TextInput" //EmojiTextarea
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Emoji Text Input</h1>
+        <p>A simple text input and textarea react component with built in emoji menu.</p>
+
+        <EmojiInput type="text" placeholder="Enter text here, type ':' to open the emoji menu" />
+
+        {/* <EmojiTextarea placeholder="Enter text here, type ':' to open the emoji menu" /> */}
+
+        `npm install emoji-text-input`
       </header>
     </div>
   );
