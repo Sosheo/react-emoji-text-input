@@ -12,7 +12,7 @@ function App() {
 
         {/* <EmojiTextarea placeholder="Enter text here, type ':' to open the emoji menu" /> */}
 
-        `npm install emoji-text-input`
+        <p>`npm install emoji-text-input`</p>
       </header>
     </div>
   );
