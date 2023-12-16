@@ -9,15 +9,38 @@ const EmojiMenu = () => {
         backgroundColor: "gray",
         display: "flex",
         width: "280px",
-        flexWrap: "wrap",
+        flexWrap: "wrap" as "wrap",
         height: "280px",
-        overflowX: "hidden",
-        overflowY: "scroll",
+        overflowX: "hidden" as "hidden",
+        overflowY: "scroll" as "scroll",
+        scrollbarWidth: "thin" as "thin",
     }
 
     return (
         <>
-            <div style={menuStyle}>
+            { /* @ts-ignore */ }
+            <style jsx>{`
+                .emoji-menu {
+                    scrollbar-width: thin;
+                    scrollbar-color: blue orange;
+                }
+
+                .emoji-menu::-webkit-scrollbar {
+                    width: 10px;
+                }
+                
+                .emoji-menu::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                
+                .emoji-menu::-webkit-scrollbar-thumb {
+                    background-color: black;
+                    border-radius: 20px;
+                    border: 3px solid grey;
+                }
+            `}</style>
+
+            <div ref={ref} className={'emoji-menu'} style={menuStyle}>
                 {emojis.map((emoji, index) => (
                     <span key={index} style={{ flexBasis: "16.6%" }}>
                         {emoji.e}
