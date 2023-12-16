@@ -17,16 +17,20 @@ const EmojiInput = forwardRef<HTMLInputElement, InputProps>(
             }
         }
 
+        function closeMenu() {
+            setShowMenu(false);
+        }
+
         return (
-            <>
+            <div>
                 <input
                     type="text"
                     ref={ref}
                     {...props}
                     onKeyUp={handleKeyup}
                 />
-                {showMenu && <EmojiMenu />  }
-            </>
+                {showMenu && <EmojiMenu closeMenu={closeMenu} />  }
+            </div>
         );
     }
 );
