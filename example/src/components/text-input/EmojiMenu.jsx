@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import emojis from "./emojis.json";
-const EmojiMenu = ({ closeMenu }) => {
+const EmojiMenu = ({ closeMenu, addEmoji }) => {
     const ref = useRef(null);
     useEffect(() => {
         function handleClickOutside(event) {
@@ -12,7 +12,7 @@ const EmojiMenu = ({ closeMenu }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref]);
+    }, [ref, closeMenu]);
     const menuStyle = {
         position: "absolute",
         padding: "10px",
@@ -50,11 +50,9 @@ const EmojiMenu = ({ closeMenu }) => {
             `}</style>
 
             <div ref={ref} className={'emoji-menu'} style={menuStyle}>
-                {emojis.map((emoji, index) => (<span key={index} style={{ flexBasis: "16.6%" }}>
+                {emojis.map((emoji, index) => (<span onClick={() => addEmoji(emoji.e)} key={index} style={{ flexBasis: "16.6%" }}>
                         {emoji.e}
                     </span>))}
-
-
             </div>
         </>);
 };
