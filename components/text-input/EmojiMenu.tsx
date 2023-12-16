@@ -1,6 +1,24 @@
+import { useRef, useEffect } from "react";
 import emojis from "./emojis.json";
 
-const EmojiMenu = () => {
+function useOutsideAlerter(ref: any) {
+}
+
+const EmojiMenu = ({ closeMenu }: { closeMenu: () => void }) => {
+    const ref = useRef<any>(null);
+    
+    useEffect(() => {
+        function handleClickOutside(event: { target: any; }) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                closeMenu();
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
 
     const menuStyle = {
         position: "absolute" as "absolute",
