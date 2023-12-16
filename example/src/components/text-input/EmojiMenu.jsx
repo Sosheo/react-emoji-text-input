@@ -50,9 +50,9 @@ const EmojiMenu = ({ closeMenu, addEmoji }) => {
             `}</style>
 
             <div ref={ref} className={'emoji-menu'} style={menuStyle}>
-                {emojis.map((emoji, index) => (<span onClick={() => addEmoji(emoji.e)} key={index} style={{ flexBasis: "16.6%" }}>
+                {emojis.map((emoji, index) => (<button onClick={() => addEmoji(emoji.e)} key={index} style={{ flexBasis: "16.6%", backgroundColor: "transparent", border: "0px", margin: "0px", padding: "0px", fontSize: "1.8rem" }}>
                         {emoji.e}
-                    </span>))}
+                    </button>))}
             </div>
         </>);
 };
