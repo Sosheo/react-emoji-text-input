@@ -39,7 +39,7 @@ const EmojiMenu = ({ closeMenu, addEmoji }: EmojiMenuParams) => {
     return (
         <>
             { /* @ts-ignore */ }
-            <style jsx>{`
+            <style>{`
                 .emoji-menu {
                     scrollbar-width: thin;
                     scrollbar-color: blue orange;
