@@ -1,9 +1,6 @@
 import { useRef, useEffect } from "react";
 import emojis from "./emojis.json";
 
-function useOutsideAlerter(ref: any) {
-}
-
 const EmojiMenu = ({ closeMenu }: { closeMenu: () => void }) => {
     const ref = useRef<any>(null);
     
