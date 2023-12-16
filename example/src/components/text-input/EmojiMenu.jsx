@@ -28,7 +28,7 @@ const EmojiMenu = ({ closeMenu, addEmoji }) => {
     };
     return (<>
             {/* @ts-ignore */}
-            <style jsx>{`
+            <style>{`
                 .emoji-menu {
                     scrollbar-width: thin;
                     scrollbar-color: blue orange;

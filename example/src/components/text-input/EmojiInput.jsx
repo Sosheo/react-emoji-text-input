@@ -27,10 +27,12 @@ const EmojiInput = ({ className, ...props }) => {
             }
         }
     }
-    return (<div>
+    return (
+        <div>
             <input type="text" ref={ref} {...props} onKeyUp={handleKeyup}/>
             {showMenu && <EmojiMenu addEmoji={addEmoji} closeMenu={closeMenu}/>}
-        </div>);
+        </div>
+    );
 };
 EmojiInput.displayName = "EmojiInput";
 export { EmojiInput };
