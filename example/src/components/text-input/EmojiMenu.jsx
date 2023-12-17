@@ -1,11 +1,14 @@
 import { useRef, useEffect } from "react";
 import emojis from "./emojis.json";
 const EmojiButton = ({ emoji, addEmoji }) => {
-    return (<button onClick={() => addEmoji(emoji.e)} className={'emoji-button'}>
-            {emoji.e}
-        </button>);
+    return (<div className={'emoji-button'}>
+            {/* <label>{emoji.n}</label> */}
+            <button onClick={() => addEmoji(emoji.e)}>
+                {emoji.e}
+            </button>
+        </div>);
 };
-const EmojiMenu = ({ closeMenu, addEmoji }) => {
+const EmojiMenu = ({ closeMenu, addEmoji, filter }) => {
     const ref = useRef(null);
     useEffect(() => {
         function handleClickOutside(event) {
@@ -18,36 +21,36 @@ const EmojiMenu = ({ closeMenu, addEmoji }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [ref, closeMenu]);
-    const menuStyle = {
-        position: "absolute",
-        padding: "10px",
-        border: "1px solid white",
-        backgroundColor: "gray",
-        display: "flex",
-        width: "280px",
-        flexWrap: "wrap",
-        height: "280px",
-        overflowX: "hidden",
-        overflowY: "scroll",
-        scrollbarWidth: "thin",
-    };
     return (<>
-            {/* @ts-ignore */}
             <style>{`
                 .emoji-menu {
+                    position: absolute;
+                    padding: 10px;
+                    border: 1px solid white;
+                    background-color: gray;
+                    width: 280px;
                     scrollbar-width: thin;
-                    scrollbar-color: blue orange;
                 }
 
-                .emoji-menu::-webkit-scrollbar {
+                .emoji-menu .emoji-list {
+                    scrollbar-width: thin;
+                    scrollbar-color: blue orange;
+                    height: 280px;
+                    overflow-x: hidden;
+                    overflow-y: scroll;
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+
+                .emoji-menu .emoji-list::-webkit-scrollbar {
                     width: 10px;
                 }
                 
-                .emoji-menu::-webkit-scrollbar-track {
+                .emoji-menu .emoji-list::-webkit-scrollbar-track {
                     background: transparent;
                 }
                 
-                .emoji-menu::-webkit-scrollbar-thumb {
+                .emoji-menu .emoji-list::-webkit-scrollbar-thumb {
                     background-color: black;
                     border-radius: 20px;
                     border: 3px solid grey;
@@ -55,6 +58,10 @@ const EmojiMenu = ({ closeMenu, addEmoji }) => {
 
                 .emoji-menu .emoji-button {
                     flex-basis: 16.6%;
+                    position: relative;
+                }
+
+                .emoji-menu .emoji-button button {
                     background-color: transparent;
                     border: 0px;
                     margin: 0px;
@@ -62,10 +69,21 @@ const EmojiMenu = ({ closeMenu, addEmoji }) => {
                     font-size: 1.8rem;
                     cursor: pointer;
                 }
+
+                .emoji-label {
+                    flex-basis: 100%;
+                    text-align: left;
+                    font-size: 1rem;
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
             `}</style>
 
-            <div ref={ref} className={'emoji-menu'} style={menuStyle}>
-                {emojis.map((emoji, index) => (<EmojiButton key={index} emoji={emoji} addEmoji={addEmoji}/>))}
+            <div ref={ref} className={'emoji-menu'}>
+                <div className="emoji-label">{filter}</div>
+                <div className="emoji-list">
+                    {emojis.map((emoji, index) => (<EmojiButton key={index} emoji={emoji} addEmoji={addEmoji}/>))}
+                </div>
             </div>
         </>);
 };
