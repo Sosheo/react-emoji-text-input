@@ -104,10 +104,13 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
                 }
             `}</style>
 
-            <div ref={ref} className={'emoji-menu'} style={menuStyle}>
-                {emojis.map((emoji, index) => (
-                    <EmojiButton key={index} emoji={emoji} addEmoji={addEmoji} />
-                ))}
+            <div ref={ref} className={'emoji-menu'}>
+                <div className="emoji-label">{filter}</div>
+                <div className="emoji-list">
+                    {emojis.map((emoji, index) => (
+                        <EmojiButton key={index} emoji={emoji} addEmoji={addEmoji} />
+                    ))}
+                </div>
             </div>
         </>
     );
