@@ -2,14 +2,16 @@ import { useRef, useState } from "react";
 import { EmojiMenu } from "./EmojiMenu";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-type EmojiInputParams = InputProps & {
+type EmojiInputParams = {
     className?: string;
+    type?: string;
 }
 
-
-const EmojiInput = ({ className, ...props }: EmojiInputParams) => {
-    const ref = useRef<HTMLInputElement>(null);
+const EmojiInput = ({ className, type = "textinput", ...props }: EmojiInputParams) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const [showMenu, setShowMenu] = useState(false);
 
     function handleKeyup(event: any) {
@@ -27,7 +29,7 @@ const EmojiInput = ({ className, ...props }: EmojiInputParams) => {
     }
 
     function addEmoji(emoji: string) {
-            const input = ref.current;
+            const input = inputRef.current ?? textAreaRef.current;
             if (input) {
                 const { selectionStart, selectionEnd } = input;
 
@@ -43,12 +45,21 @@ const EmojiInput = ({ className, ...props }: EmojiInputParams) => {
 
     return (
         <div>
+        {(type === "textinput") && (
             <input
                 type="text"
-                ref={ref}
+                ref={inputRef}
                 {...props}
                 onKeyUp={handleKeyup}
             />
+        )}
+        {(type === "textarea") && (
+            <textarea
+                ref={textAreaRef}
+                {...props}
+                onKeyUp={handleKeyup}
+            />
+        )}
             {showMenu && <EmojiMenu addEmoji={addEmoji} closeMenu={closeMenu} />}
         </div>
     );
