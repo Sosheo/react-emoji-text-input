@@ -68,7 +68,9 @@ const EmojiInput = ({ className, type = "textinput", ...props }: EmojiInputParam
                 onKeyUp={handleKeyup}
             />
         )}
-            {showMenu && <EmojiMenu addEmoji={addEmoji} closeMenu={closeMenu} />}
+            {showMenu && (
+                <EmojiMenu addEmoji={addEmoji} closeMenu={closeMenu} filter={filter} />
+            )}
         </div>
     );
 }
