@@ -8,7 +8,9 @@ function App() {
         <h1>Emoji Text Input</h1>
         <p>A simple text input and textarea react component with built in emoji menu.</p>
 
-        <EmojiInput type="text" placeholder="Enter text here, type ':' to open the emoji menu" />
+        <EmojiInput type="textinput" placeholder="Enter text here, type ':' to open the emoji menu" />
+
+        <EmojiInput type="textarea" placeholder="Enter text here, type ':' to open the emoji menu" />
 
         {/* <EmojiTextarea placeholder="Enter text here, type ':' to open the emoji menu" /> */}
 
