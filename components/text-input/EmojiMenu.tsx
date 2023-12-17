@@ -20,12 +20,12 @@ type EmojiButtonParams = {
 
 const EmojiButton = ({ emoji, addEmoji }: EmojiButtonParams) => {
     return (
-        <button
-            onClick={() => addEmoji(emoji.e)}
-            className={'emoji-button'}
-        >
-            {emoji.e}
-        </button>
+        <div className={'emoji-button'}>
+            {/* <label>{emoji.n}</label> */}
+            <button onClick={() => addEmoji(emoji.e)}>
+                {emoji.e}
+            </button>
+        </div>
     );
 }
 
