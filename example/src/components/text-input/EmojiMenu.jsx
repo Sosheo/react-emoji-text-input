@@ -1,5 +1,10 @@
 import { useRef, useEffect } from "react";
 import emojis from "./emojis.json";
+const EmojiButton = ({ emoji, addEmoji }) => {
+    return (<button onClick={() => addEmoji(emoji.e)} className={'emoji-button'}>
+            {emoji.e}
+        </button>);
+};
 const EmojiMenu = ({ closeMenu, addEmoji }) => {
     const ref = useRef(null);
     useEffect(() => {
@@ -47,12 +52,20 @@ const EmojiMenu = ({ closeMenu, addEmoji }) => {
                     border-radius: 20px;
                     border: 3px solid grey;
                 }
+
+                .emoji-menu .emoji-button {
+                    flex-basis: 16.6%;
+                    background-color: transparent;
+                    border: 0px;
+                    margin: 0px;
+                    padding: 0px;
+                    font-size: 1.8rem;
+                    cursor: pointer;
+                }
             `}</style>
 
             <div ref={ref} className={'emoji-menu'} style={menuStyle}>
-                {emojis.map((emoji, index) => (<button onClick={() => addEmoji(emoji.e)} key={index} style={{ flexBasis: "16.6%", backgroundColor: "transparent", border: "0px", margin: "0px", padding: "0px", fontSize: "1.8rem" }}>
-                        {emoji.e}
-                    </button>))}
+                {emojis.map((emoji, index) => (<EmojiButton key={index} emoji={emoji} addEmoji={addEmoji}/>))}
             </div>
         </>);
 };
