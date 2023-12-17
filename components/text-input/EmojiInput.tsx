@@ -16,11 +16,19 @@ const EmojiInput = ({ className, type = "textinput", ...props }: EmojiInputParam
 
     function handleKeyup(event: any) {
         if ((event.keyCode === 186) || (event.key === ":")) {
-            setShowMenu(true);
+            return setShowMenu(true);
         }
 
         if ((event.keyCode === 27) || event.key === "escape") {
-            setShowMenu(false);
+            return setShowMenu(false);
+        }
+
+        const textBeforeCursor = event.target.value.substring(0, event.target.selectionStart);
+        const lastColonIndex = textBeforeCursor.lastIndexOf(':');
+
+        if (lastColonIndex !== -1) {
+            const textBetweenColonAndCursor = textBeforeCursor.substring(lastColonIndex + 1);
+            setFilter(textBetweenColonAndCursor);
         }
     }
 
