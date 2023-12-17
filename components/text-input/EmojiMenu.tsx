@@ -10,6 +10,7 @@ type Emoji = {
 type EmojiMenuParams = { 
     closeMenu: () => void,
     addEmoji: (emoji: string) => void,
+    filter: string,
 }
 
 type EmojiButtonParams = {
@@ -28,7 +29,7 @@ const EmojiButton = ({ emoji, addEmoji }: EmojiButtonParams) => {
     );
 }
 
-const EmojiMenu = ({ closeMenu, addEmoji }: EmojiMenuParams) => {
+const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
     const ref = useRef<any>(null);
     
     useEffect(() => {
