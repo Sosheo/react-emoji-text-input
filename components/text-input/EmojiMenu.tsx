@@ -45,38 +45,37 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
         };
     }, [ref, closeMenu]);
 
-    const menuStyle = {
-        position: "absolute" as "absolute",
-        padding: "10px",
-        border: "1px solid white",
-        backgroundColor: "gray",
-        display: "flex",
-        width: "280px",
-        flexWrap: "wrap" as "wrap",
-        height: "280px",
-        overflowX: "hidden" as "hidden",
-        overflowY: "scroll" as "scroll",
-        scrollbarWidth: "thin" as "thin",
-    }
-
     return (
         <>
-            { /* @ts-ignore */ }
             <style>{`
                 .emoji-menu {
+                    position: absolute;
+                    padding: 10px;
+                    border: 1px solid white;
+                    background-color: gray;
+                    width: 280px;
                     scrollbar-width: thin;
-                    scrollbar-color: blue orange;
                 }
 
-                .emoji-menu::-webkit-scrollbar {
+                .emoji-menu .emoji-list {
+                    scrollbar-width: thin;
+                    scrollbar-color: blue orange;
+                    height: 280px;
+                    overflow-x: hidden;
+                    overflow-y: scroll;
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+
+                .emoji-menu .emoji-list::-webkit-scrollbar {
                     width: 10px;
                 }
                 
-                .emoji-menu::-webkit-scrollbar-track {
+                .emoji-menu .emoji-list::-webkit-scrollbar-track {
                     background: transparent;
                 }
                 
-                .emoji-menu::-webkit-scrollbar-thumb {
+                .emoji-menu .emoji-list::-webkit-scrollbar-thumb {
                     background-color: black;
                     border-radius: 20px;
                     border: 3px solid grey;
@@ -84,12 +83,24 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
 
                 .emoji-menu .emoji-button {
                     flex-basis: 16.6%;
+                    position: relative;
+                }
+
+                .emoji-menu .emoji-button button {
                     background-color: transparent;
                     border: 0px;
                     margin: 0px;
                     padding: 0px;
                     font-size: 1.8rem;
                     cursor: pointer;
+                }
+
+                .emoji-label {
+                    flex-basis: 100%;
+                    text-align: left;
+                    font-size: 1rem;
+                    text-align: center;
+                    margin-bottom: 10px;
                 }
             `}</style>
 
