@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
 import { EmojiMenu } from "./EmojiMenu";
-const EmojiInput = ({ className, type = "textinput", ...props }) => {
-    const inputRef = useRef(null);
-    const textAreaRef = useRef(null);
+const EmojiTextarea = ({ className, ...props }) => {
+    const ref = useRef(null);
     const [showMenu, setShowMenu] = useState(false);
     function handleKeyup(event) {
         if ((event.keyCode === 186) || (event.key === ":")) {
@@ -16,7 +15,7 @@ const EmojiInput = ({ className, type = "textinput", ...props }) => {
         setShowMenu(false);
     }
     function addEmoji(emoji) {
-        const input = inputRef.current ?? textAreaRef.current;
+        const input = ref.current;
         if (input) {
             const { selectionStart, selectionEnd } = input;
             if (selectionStart && selectionEnd) {
@@ -29,8 +28,7 @@ const EmojiInput = ({ className, type = "textinput", ...props }) => {
         }
     }
     return (<div>
-        {(type === "textinput") && (<input type="text" ref={inputRef} {...props} onKeyUp={handleKeyup}/>)}
-        {(type === "textarea") && (<textarea ref={textAreaRef} {...props} onKeyUp={handleKeyup}/>)}
+            <input type="text" ref={ref} {...props} onKeyUp={handleKeyup}/>
             {showMenu && <EmojiMenu addEmoji={addEmoji} closeMenu={closeMenu}/>}
         </div>);
 };
