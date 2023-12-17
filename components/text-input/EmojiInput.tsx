@@ -13,6 +13,7 @@ const EmojiInput = ({ className, type = "textinput", ...props }: EmojiInputParam
     const inputRef = useRef<HTMLInputElement>(null);
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const [showMenu, setShowMenu] = useState(false);
+    const [filter, setFilter] = useState("");
 
     function handleKeyup(event: any) {
         if ((event.keyCode === 186) || (event.key === ":")) {
