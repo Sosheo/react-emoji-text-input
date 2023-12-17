@@ -37,19 +37,19 @@ const EmojiInput = ({ className, type = "textinput", ...props }: EmojiInputParam
     }
 
     function addEmoji(emoji: string) {
-            const input = inputRef.current ?? textAreaRef.current;
-            if (input) {
-                const { selectionStart, selectionEnd } = input;
+        const input = inputRef.current ?? textAreaRef.current;
+        if (input) {
+            const { selectionStart, selectionEnd } = input;
 
-                if (selectionStart && selectionEnd) {
-                    const newValue = input.value.substring(0, selectionStart) + emoji + input.value.substring(selectionEnd);
-                    input.value = newValue;
-                    input.focus();
-                    input.selectionStart = selectionStart + emoji.length;
-                    input.selectionEnd = selectionStart + emoji.length;
-                }
+            if (selectionStart && selectionEnd) {
+                const newValue = `${input.value.substring(0, selectionStart)}${emoji}${input.value.substring(selectionEnd)}`;
+                input.value = newValue;
+                input.focus();
+                input.selectionStart = selectionStart + emoji.length;
+                input.selectionEnd = selectionStart + emoji.length;
             }
         }
+    }
 
     return (
         <div>
