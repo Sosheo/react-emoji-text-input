@@ -78,7 +78,6 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }) => {
                     margin-bottom: 10px;
                 }
             `}</style>
-
             <div ref={ref} className={'emoji-menu'}>
                 <div className="emoji-label">{filter}</div>
                 <div className="emoji-list">
