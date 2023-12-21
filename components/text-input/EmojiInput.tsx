@@ -37,17 +37,25 @@ const EmojiInput = ({ className, type = "textinput", ...props }: EmojiInputParam
         setShowMenu(false);
     }
 
+   
     function addEmoji(emoji: string) {
         const input = inputRef.current ?? textAreaRef.current;
         if (input) {
             const { selectionStart, selectionEnd } = input;
 
             if (selectionStart && selectionEnd) {
-                const newValue = `${input.value.substring(0, selectionStart)}${emoji}${input.value.substring(selectionEnd)}`;
+                const textBeforeCursor = input.value.substring(0, selectionStart);
+                const lastColonIndex = textBeforeCursor.lastIndexOf(':');
+
+                const index = (lastColonIndex !== -1) ? lastColonIndex : selectionStart;
+
+                const newValue = `${input.value.substring(0, index)}${emoji}${input.value.substring(selectionEnd)}`;
+                const posStart = index + emoji.length;
+                const posEnd = index + emoji.length;
+                
                 input.value = newValue;
+                input.setSelectionRange(posStart, posEnd);
                 input.focus();
-                input.selectionStart = selectionStart + emoji.length;
-                input.selectionEnd = selectionStart + emoji.length;
             }
         }
     }

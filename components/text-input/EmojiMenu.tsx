@@ -2,9 +2,9 @@ import { useRef, useEffect } from "react";
 import emojis from "./emojis.json";
 
 type Emoji = {
-    u: string;
-    e: string;
-    n: string;
+    u: string; // unicode
+    e: string; // emoji
+    n: string; // name
 }
 
 type EmojiMenuParams = { 
@@ -103,7 +103,6 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
                     margin-bottom: 10px;
                 }
             `}</style>
-
             <div ref={ref} className={'emoji-menu'}>
                 <div className="emoji-label">{filter}</div>
                 <div className="emoji-list">
