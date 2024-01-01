@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import emojis from "./emojis.json";
 
 type Emoji = {
@@ -16,11 +16,14 @@ type EmojiMenuParams = {
 type EmojiButtonParams = {
     emoji: Emoji,
     addEmoji: (emoji: string) => void,
+    isSelected: boolean,
 }
 
-const EmojiButton = ({ emoji, addEmoji }: EmojiButtonParams) => {
+const EmojiButton = ({ emoji, addEmoji, isSelected }: EmojiButtonParams) => {
+    const className = isSelected ? "selected emoji-button" : "emoji-button";
+
     return (
-        <div className={'emoji-button'}>
+        <div className={className}>
             {/* <label>{emoji.n}</label> */}
             <button onClick={() => addEmoji(emoji.e)}>
                 {emoji.e}
@@ -29,8 +32,10 @@ const EmojiButton = ({ emoji, addEmoji }: EmojiButtonParams) => {
     );
 }
 
+
 const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
     const ref = useRef<any>(null);
+    const [selectedEmoji, setSelectedEmoji] = useState<number | null>(0);
     
     useEffect(() => {
         function handleClickOutside(event: { target: any; }) {
@@ -86,6 +91,11 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
                     position: relative;
                 }
 
+                .emoji-menu .emoji-button.selected {
+                    background-color: blue;
+                    border: 2px solid white;
+                }
+
                 .emoji-menu .emoji-button button {
                     background-color: transparent;
                     border: 0px;
@@ -107,7 +117,7 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }: EmojiMenuParams) => {
                 <div className="emoji-label">{filter}</div>
                 <div className="emoji-list">
                     {emojis.map((emoji, index) => (
-                        <EmojiButton key={index} emoji={emoji} addEmoji={addEmoji} />
+                        <EmojiButton key={index} emoji={emoji} isSelected={selectedEmoji ? selectedEmoji === index : false} addEmoji={addEmoji} />
                     ))}
                 </div>
             </div>
