@@ -1,7 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import emojis from "./emojis.json";
-const EmojiButton = ({ emoji, addEmoji }) => {
-    return (<div className={'emoji-button'}>
+const EmojiButton = ({ emoji, addEmoji, isSelected }) => {
+    const className = isSelected ? "selected emoji-button" : "emoji-button";
+    return (<div className={className}>
             {/* <label>{emoji.n}</label> */}
             <button onClick={() => addEmoji(emoji.e)}>
                 {emoji.e}
@@ -10,6 +11,7 @@ const EmojiButton = ({ emoji, addEmoji }) => {
 };
 const EmojiMenu = ({ closeMenu, addEmoji, filter }) => {
     const ref = useRef(null);
+    const [selectedEmoji, setSelectedEmoji] = useState(0);
     useEffect(() => {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
@@ -61,6 +63,11 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }) => {
                     position: relative;
                 }
 
+                .emoji-menu .emoji-button.selected {
+                    background-color: blue;
+                    border: 2px solid white;
+                }
+
                 .emoji-menu .emoji-button button {
                     background-color: transparent;
                     border: 0px;
@@ -81,7 +88,7 @@ const EmojiMenu = ({ closeMenu, addEmoji, filter }) => {
             <div ref={ref} className={'emoji-menu'}>
                 <div className="emoji-label">{filter}</div>
                 <div className="emoji-list">
-                    {emojis.map((emoji, index) => (<EmojiButton key={index} emoji={emoji} addEmoji={addEmoji}/>))}
+                    {emojis.map((emoji, index) => (<EmojiButton key={index} emoji={emoji} isSelected={selectedEmoji ? selectedEmoji === index : false} addEmoji={addEmoji}/>))}
                 </div>
             </div>
         </>);
